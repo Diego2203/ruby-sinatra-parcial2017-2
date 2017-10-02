@@ -5,16 +5,28 @@ html,body, .pantalla{
 }
 
 .login{
-    border: 1px solid black;
     width: 500px;
-    height: 350px;
     background: white;
+    -webkit-box-shadow: 3px 6px 32px 6px rgba(0,0,0,0.75);
+    -moz-box-shadow: 3px 6px 32px 6px rgba(0,0,0,0.75);
+    box-shadow: 3px 6px 32px 6px rgba(0,0,0,0.75);
 }
 .l_text{
     background: rgba(221, 220, 220, 0.51);
 }
 
-.kazu
-{
-  background-color: blue;
+.mimodal{
+    display: flex; 
+    position: fixed; 
+    
+    width: 100%;
+ 
 }
+.registro{
+    border: 1px solid black;
+    background: white;
+}
+.input_text{
+    width: 450px;
+}
+    
