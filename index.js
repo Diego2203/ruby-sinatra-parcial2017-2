@@ -11,7 +11,8 @@ var abrir_registro = function(){
     var modal = document.getElementById("mimodal");
     modal.classList.remove("invisible");
     modal.classList.add("visible");
-    
+    modal.classList.add("animated");
+    modal.classList.add("bounceInDown")
 }
 var cerrar_registro = function(){
     var modal = document.getElementById("mimodal");
@@ -21,7 +22,8 @@ var cerrar_registro = function(){
 
 var main = function(){
     
-    document.getElementById("crear_usuario").addEventListener("click", abrir_registro)
+    document.getElementById("crear_usuario").addEventListener("click", abrir_registro);
+    document.getElementById("icon_cerrar").addEventListener("click", cerrar_registro)
 
 }
 

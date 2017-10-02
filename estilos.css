@@ -29,4 +29,8 @@ html,body, .pantalla{
 .input_text{
     width: 450px;
 }
+
+.icon_cerrar{
+    background: gray;
+}
     
