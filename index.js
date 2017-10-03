@@ -32,7 +32,6 @@ var habilitar_botones=function()
     var c=document.getElementById("input3");
     var d=document.getElementById("input4");
     var e=document.getElementById("input5");
-    console.log("hola");
     if(condicion==false)
     {
       a.disabled=true;
@@ -74,10 +73,26 @@ function respuestaEmail(evt){
     if (respuesta.mensaje[0] == 0) {
       resultado.innerHTML = "Correo ingresado no existe";
     }else if(respuesta.mensaje[0] == 1){
-      resultado.innerHTML = "Correo ingresado existe";
+      resultado.innerHTML = "";
     }
   }
 };
+
+function repetirCorreo()
+{
+
+  console.log("hola");
+  var correo=document.getElementById("input1").value;
+  var correo_repetido=document.getElementById("input2").value;
+  var resultado=document.getElementById("result2");
+  if(correo!=correo_repetido)
+  {
+    resultado.innerHTML="Correo ingresado no coincide";
+  }
+  else{
+    resultado.innerHTML="";
+  }
+}
 
 
 var main = function(){
@@ -85,6 +100,7 @@ var main = function(){
     document.getElementById("icon_cerrar").addEventListener("click", cerrar_registro);
     document.getElementById("input1").addEventListener("keyup",validateEmail);
     document.addEventListener("click", habilitar_botones);
+    document.getElementById("input2 ").addEventListener("keyup",repetirCorreo);
 }
 
 window.onload = main;
