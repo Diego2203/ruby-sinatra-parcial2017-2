@@ -3,21 +3,24 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
-	<link rel="stylesheet" type="text/css" href="estilos.css">
 	 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
 	 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+	 <link rel="stylesheet" href="estilos.css">
+	 <link rel="stylesheet" href="animate.css">
 </head>
 <body>
 	<div class="container">
 		<div class="row">
 			<div class="col">
-				<table class="table">
-				  <tbody>
-				    <tr class="table-active" id="departamentos">
-				      <td>Mark</td>
-				      <td>Otto</td>
-				    </tr>
-				  </tbody>
+				<h4 class="mt-4 mb-4">Departamentos</h4>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Nombre</th>
+							<th>Operaciones</th>
+						</tr>
+					</thead>
+				  	<tbody id="departamentos"></tbody>
 				</table>
 			</div>
 			<div class="col">

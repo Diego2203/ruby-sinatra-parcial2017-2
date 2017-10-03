@@ -1,6 +1,8 @@
 html,body, .pantalla{
     width: 100%;
     height: 100%;
+}
+.fondo_prin{
     background: #7ED47E;
 }
 
@@ -41,5 +43,11 @@ html,body, .pantalla{
     background: #28a745;
     color: white;
     border: 1px solid white;
+}
+.h_azul:hover{
+    color: blue;
+}
+.h_rojo:hover{
+    color: red;
 }
     
