@@ -18,13 +18,14 @@ html,body, .pantalla{
 .mimodal{
     display: flex; 
     position: fixed; 
-    
+    height: 100%;
     width: 100%;
- 
+    overflow: auto;
 }
 .registro{
     border: 1px solid black;
     background: white;
+    height: 670px;
 }
 .input_text{
     width: 450px;
