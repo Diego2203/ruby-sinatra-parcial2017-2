@@ -93,7 +93,7 @@ function validateUser()
   req.send(JSON.stringify(jsRequest));
   req.onreadystatechange = respuesta1;
 }
-
+//mejorarlo con respuesta1
 function respuesta(evt){
   var resultado = document.getElementById("result");
   if (this.readyState == 4 && this.status == 200) {
@@ -148,14 +148,52 @@ function repetirContraseña()
   }
 };
 
+
+
+var addTodoClick = function(){
+  var correo=document.getElementById("input1").value;
+  var user=document.getElementById("input3").value;
+  var contraseña=document.getElementById("input4").value;
+
+    var jsRequest = {
+      "usuario" : user,
+      "contrasenia" : contraseña,
+      "correo" : correo
+    };
+
+    console.log(JSON.stringify(jsRequest));
+
+    // Iniciamos la comunicacion con el servidor
+    var url = "http://45.55.64.102/g2/usuario/guardar"
+    var req = new XMLHttpRequest();
+    req.open("POST", url);
+    req.onreadystatechange = respuestaAddTodo;
+    console.log("aca");
+    req.send(JSON.stringify(jsRequest));
+    console.log("aca");
+};
+
+
+var respuestaAddTodo = function(evt){
+  if (evt.target.readyState == 4){
+    if (evt.target.status == 200){
+      // Todo OK en la comunicacion
+      console.log(evt.target.responseText);
+    }
+  }
+
+};
+
 var main = function(){
     document.getElementById("crear_usuario").addEventListener("click", abrir_registro);
     document.getElementById("icon_cerrar").addEventListener("click", cerrar_registro);
+    document.getElementById("guar_camb").addEventListener("click", cerrar_registro);
     document.getElementById("input1").addEventListener("keyup",validateEmail);
     document.addEventListener("click", habilitar_botones);
     document.getElementById("input2").addEventListener("keyup",repetirCorreo);
     document.getElementById("input3").addEventListener("keyup",validateUser);
     document.getElementById("input5").addEventListener("keyup",repetirContraseña);
+    document.getElementById("guar_camb").addEventListener("click",addTodoClick);
 }
 
 window.onload = main;
