@@ -30,7 +30,15 @@ html,body, .pantalla{
     width: 450px;
 }
 
-.icon_cerrar{
-    background: gray;
+#icon_cerrar{
+    color: black;
+}
+#icon_cerrar:hover{
+    color: gray;
+}
+#guar_camb{
+    background: #28a745;
+    color: white;
+    border: 1px solid white;
 }
     

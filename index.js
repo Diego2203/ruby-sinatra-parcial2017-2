@@ -12,7 +12,11 @@ var abrir_registro = function(){
     modal.classList.remove("invisible");
     modal.classList.add("visible");
     modal.classList.add("animated");
-    modal.classList.add("bounceInDown")
+    modal.classList.add("bounceInDown");
+    modal.addEventListener("animationend", function(){
+        modal.classList.remove("animated");
+        modal.classList.remove("bounceInDown");
+    })
 }
 var cerrar_registro = function(){
     var modal = document.getElementById("mimodal");
