@@ -51,37 +51,77 @@ var habilitar_botones=function()
     }
 };
 
+function validarQueEsEmail(email) {
+  var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(email);
+};
+
 function validateEmail(){
   var email = document.getElementById("input1").value;
+  var resultado = document.getElementById("result");
     var jsRequest = {
       "correo" : email
     };
-    console.log(JSON.stringify(jsRequest));
-    //Iniciamos la comunicacion con el servidor
-    var url = "http://45.55.64.102/g2/usuario/correo_repetido"
-    var req = new XMLHttpRequest();
-    req.open("POST",url);
-    req.send(JSON.stringify(jsRequest));
-    req.onreadystatechange = respuestaEmail;
+    if(validarQueEsEmail(email))
+    {
+      resultado.innerHTML="";
+      console.log(JSON.stringify(jsRequest));
+      //Iniciamos la comunicacion con el servidor
+      var url = "http://45.55.64.102/g2/usuario/correo_repetido";
+      var req = new XMLHttpRequest();
+      req.open("POST",url);
+      req.send(JSON.stringify(jsRequest));
+      req.onreadystatechange = respuesta;
+    }
+    else {
+      resultado.innerHTML="no es un correo valido";
+    }
 };
 
-function respuestaEmail(evt){
+function validateUser()
+{
+  var user=document.getElementById("input3").value;
+  var resultado=document.getElementById("result3").value;
+  var jsRequest = {
+    "usuario" : user
+  };
+  console.log(JSON.stringify(jsRequest));
+  //Iniciamos la comunicacion con el servidor
+  var url = "http://45.55.64.102/g2/usuario/usuario_repetido";
+  var req = new XMLHttpRequest();
+  req.open("POST",url);
+  req.send(JSON.stringify(jsRequest));
+  req.onreadystatechange = respuesta1;
+}
+
+function respuesta(evt){
   var resultado = document.getElementById("result");
   if (this.readyState == 4 && this.status == 200) {
     console.log(evt.target.responseText);
     var respuesta = JSON.parse(evt.target.responseText);
     if (respuesta.mensaje[0] == 0) {
-      resultado.innerHTML = "Correo ingresado no existe";
-    }else if(respuesta.mensaje[0] == 1){
       resultado.innerHTML = "";
+    }else if(respuesta.mensaje[0] == 1){
+      resultado.innerHTML = "correo ingresado existe";
+    }
+  }
+};
+
+function respuesta1(evt){
+  var resultado = document.getElementById("result3");
+  if (this.readyState == 4 && this.status == 200) {
+    console.log(evt.target.responseText);
+    var respuesta = JSON.parse(evt.target.responseText);
+    if (respuesta.mensaje[0] == 0) {
+      resultado.innerHTML = "";
+    }else if(respuesta.mensaje[0] == 1){
+      resultado.innerHTML = "Usuario ya existente";
     }
   }
 };
 
 function repetirCorreo()
 {
-
-  console.log("hola");
   var correo=document.getElementById("input1").value;
   var correo_repetido=document.getElementById("input2").value;
   var resultado=document.getElementById("result2");
@@ -92,15 +132,30 @@ function repetirCorreo()
   else{
     resultado.innerHTML="";
   }
-}
+};
 
+function repetirContraseña()
+{
+  var contraseña=document.getElementById("input4").value;
+  var confContraseña=document.getElementById("input5").value;
+  var resultado=document.getElementById("result4");
+  if(contraseña==confContraseña)
+  {
+    resultado.innerHTML="";
+  }
+  else{
+    resultado.innerHTML="Contraseña ingresada no coincide";
+  }
+};
 
 var main = function(){
     document.getElementById("crear_usuario").addEventListener("click", abrir_registro);
     document.getElementById("icon_cerrar").addEventListener("click", cerrar_registro);
     document.getElementById("input1").addEventListener("keyup",validateEmail);
     document.addEventListener("click", habilitar_botones);
-    document.getElementById("input2 ").addEventListener("keyup",repetirCorreo);
+    document.getElementById("input2").addEventListener("keyup",repetirCorreo);
+    document.getElementById("input3").addEventListener("keyup",validateUser);
+    document.getElementById("input5").addEventListener("keyup",repetirContraseña);
 }
 
 window.onload = main;
