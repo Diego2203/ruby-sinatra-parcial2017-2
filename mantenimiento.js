@@ -1,4 +1,4 @@
-var crear_tablas_nombre = function(lista_db,nodo_id,i) {
+var crear_tablas_nombre = function (lista_db, nodo_id, i) {
 
     var depar = document.getElementById(nodo_id);
     var dep_tr = document.createElement("tr");
@@ -12,10 +12,18 @@ var crear_tablas_nombre = function(lista_db,nodo_id,i) {
     var i_pencil = document.createElement("i");
     var i_eliminar = document.createElement("i");
 
-    i_search.className = "fa fa-search h_azul animated pulse";  
-    i_search.addEventListener("click", function(){
+    i_search.className = "fa fa-search h_azul animated pulse";
+    i_search.addEventListener("click", function () {
+        if(nodo_id == "departamentos"){
+            if(document.getElementById("provincias").childNodes.length == 0){
+                mostrar_prov(i + 1);
+            }
+            else{
+                eliminar_nodos("provincias")
+                eliminar_nodos("prov_head")
+            }
+        }
         
-        mostrar_dpts(i+1);
     })
     i_pencil.className = "fa fa-pencil ml-3 h_azul animated pulse";
     i_eliminar.className = "fa fa-times ml-3 h_rojo animated pulse";
@@ -27,18 +35,18 @@ var crear_tablas_nombre = function(lista_db,nodo_id,i) {
 }
 
 
-var mostrar_dep = function() {
+var mostrar_dep = function () {
 
     var xhr = new XMLHttpRequest();
     var lista = 0;
 
-    xhr.onreadystatechange = function() {
+    xhr.onreadystatechange = function () {
         if (xhr.readyState == 4 && xhr.status == 200) {
             lista = JSON.parse(xhr.responseText);
 
             for (var i = 0; i < lista.length; i++) {
 
-                crear_tablas_nombre(lista[i],"departamentos",i)
+                crear_tablas_nombre(lista[i], "departamentos", i)
             }
         }
     };
@@ -46,10 +54,10 @@ var mostrar_dep = function() {
     xhr.open("GET", "http://45.55.64.102/g2/departamento/listar", true);
     xhr.send();
 }
-var mostrar_dpts = function(depart_id) {
+var mostrar_prov = function (depart_id) {
     var xhr = new XMLHttpRequest();
     var lista_prov = 0;
-    xhr.onreadystatechange = function() {
+    xhr.onreadystatechange = function () {
         if (xhr.readyState == 4 && xhr.status == 200) {
             lista_prov = JSON.parse(xhr.responseText);
             //console.log(lista_prov);
@@ -60,19 +68,24 @@ var mostrar_dpts = function(depart_id) {
             document.getElementById("prov_head").appendChild(nombre_head);
             document.getElementById("prov_head").appendChild(ope_head);
             for (var i = 0; i < lista_prov.length; i++) {
-                crear_tablas_nombre(lista_prov[i],"provincias");
+                crear_tablas_nombre(lista_prov[i], "provincias",i);
             }
         }
     }
     xhr.open("GET", "http://45.55.64.102/g2/provincia/listar/" + depart_id, true);
     xhr.send();
 }
+var eliminar_nodos = function(nodo_id){
+    var nodo = document.getElementById(nodo_id);
+    while (nodo.firstChild) {
+        nodo.removeChild(nodo.firstChild);
+    }
+}
 
 
 
 
-
-var main = function() {
+var main = function () {
     mostrar_dep();
 }
 
