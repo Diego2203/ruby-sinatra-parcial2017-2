@@ -140,9 +140,46 @@ function repetirContraseña() {
   }
 };
 
+function cifrarPassword(){
+  var password = document.getElementById("input4").value;
+  var jsRequest = {
+    "texto" : password
+  };
+  var xhr = new XMLHttpRequest();
+  var url = "http://45.55.64.102/g2/cipher/encode";
+  xhr.open("POST", url);
+  xhr.onreadystatechange = respuestaPassword;
+  xhr.send(JSON.stringify(jsRequest));
+};
 
 
-var addTodoClick = function () {
+function respuestaPassword(evt){
+  if (evt.target.readyState == 4 && evt.target.status == 200) {
+    var password = JSON.parse(evt.target.responseText);
+    var cifrado = password.mensaje[0];
+    console.log(cifrado);
+
+    var correo=document.getElementById("input1").value;
+    var user=document.getElementById("input3").value;
+
+    var jsRequest1 = {
+      "usuario" : user,
+      "correo" : correo,
+      "contrasenia" : cifrado
+    };
+
+    console.log(JSON.stringify(jsRequest1));
+    var req1 = new XMLHttpRequest();
+    var url1 = "http://45.55.64.102/g2/usuario/guardar";
+    req1.open("POST",url1);
+    req1.onreadystatechange = respuestaAddTodo;
+    console.log("ESTO ES LO QUE SE ESTA MANDANDO COMO FORMULARIO");
+    req1.send(JSON.stringify(jsRequest1));
+  }
+};
+
+
+/*var addTodoClick = function () {
   var correo = document.getElementById("input1").value;
   var user = document.getElementById("input3").value;
   var contraseña = document.getElementById("input4").value;
@@ -164,7 +201,7 @@ var addTodoClick = function () {
   req.send(JSON.stringify(jsRequest));
   console.log("aca");
 };
-
+*/
 
 var respuestaAddTodo = function (evt) {
   if (evt.target.readyState == 4) {
@@ -176,16 +213,61 @@ var respuestaAddTodo = function (evt) {
 
 };
 
+function login(){
+  var password = document.getElementById("password_login").value;
+  var jsRequest = {
+    "texto" : password
+  };
+  var xhr = new XMLHttpRequest();
+  var url = "http://45.55.64.102/g2/cipher/encode";
+  xhr.open("POST", url);
+  xhr.onreadystatechange = verificarPassword;
+  xhr.send(JSON.stringify(jsRequest));
+};
+
+function verificarPassword(evt){
+  if (evt.target.readyState == 4 && evt.target.status == 200) {
+    var password = JSON.parse(evt.target.responseText);
+    var cifrado = password.mensaje[0];
+    console.log(cifrado);
+    var usuario = document.getElementById("usuario_login").value;
+    var jsRequest = {
+      "usuario" : usuario,
+      "contrasenia" : cifrado
+    };
+    console.log(JSON.stringify(jsRequest));
+    var url = "http://45.55.64.102/g2/usuario/validar";
+    var req = new XMLHttpRequest();
+    req.open("POST", url);
+    req.onreadystatechange = redireccion;
+    req.send(JSON.stringify(jsRequest));
+  }
+};
+
+function redireccion(evt){
+  if (evt.target.readyState == 4 && evt.target.status == 200) {
+    console.log(evt.target.responseText);
+    var respuesta = JSON.parse(evt.target.responseText);
+    if (respuesta.mensaje[0] == 1) {
+      document.getElementById("result5").innerHTML = "Login OK";//Listo
+      window.location.href = "mantenimiento.html";
+    }else{
+      document.getElementById("result5").innerHTML = "Usuario y/o contraseña no coinciden";
+    }
+  }
+}
+
 var main = function () {
   document.getElementById("crear_usuario").addEventListener("click", abrir_registro);
-  document.getElementById("icon_cerrar").addEventListener("click", cerrar_registro);
-  document.getElementById("guar_camb").addEventListener("click", cerrar_registro);
-  document.getElementById("input1").addEventListener("keyup", validateEmail);
-  document.addEventListener("click", habilitar_botones);
-  document.getElementById("input2").addEventListener("keyup", repetirCorreo);
-  document.getElementById("input3").addEventListener("keyup", validateUser);
-  document.getElementById("input5").addEventListener("keyup", repetirContraseña);
-  document.getElementById("guar_camb").addEventListener("click", addTodoClick);
+    document.getElementById("icon_cerrar").addEventListener("click", cerrar_registro);
+    document.getElementById("guar_camb").addEventListener("click", cerrar_registro);
+    document.getElementById("input1").addEventListener("keyup",validateEmail);
+    document.addEventListener("click", habilitar_botones);
+    document.getElementById("input2").addEventListener("keyup",repetirCorreo);
+    document.getElementById("input3").addEventListener("keyup",validateUser);
+    document.getElementById("input5").addEventListener("keyup",repetirContraseña);
+    document.getElementById("guar_camb").addEventListener("click",cifrarPassword);
+    document.getElementById("ingresar").addEventListener("click",login);
 }
 
 window.onload = main;
