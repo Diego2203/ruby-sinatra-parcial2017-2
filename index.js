@@ -227,7 +227,7 @@ function redireccion(evt){
     var respuesta = JSON.parse(evt.target.responseText);
     if (respuesta.mensaje[0] == 1) {
       document.getElementById("result5").innerHTML = "Login OK";//Listo
-      window.location.href = "mantenimiento.html";
+      window.location.href = "mantanimiento.html";
     }else{
       document.getElementById("result5").innerHTML = "Usuario y/o contraseña no coinciden";
     }
@@ -244,11 +244,9 @@ function restringirRegistro()
   if(a==""&&b==""&&c==""&&d=="")
   {
     boton.disabled=false;
-    console.log("enable");
   }
   else{
     boton.disabled=true;
-    console.log("sisable");
   }
 }
 
