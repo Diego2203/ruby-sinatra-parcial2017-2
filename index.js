@@ -1,12 +1,3 @@
-var no_coin = function () {
-  var nodo_login = document.getElementById("login");
-  var nodo_ingresar = document.getElementById("ingresar");
-  nodo_ingresar.classList.remove("mt-4")
-  var n_span = document.createElement("span");
-  n_span.textContent = "Usuario y/o contraseña no coinciden";
-  nodo_login.insertBefore(n_span, nodo_ingresar);
-}
-
 var abrir_registro = function () {
   var modal = document.getElementById("mimodal");
   modal.classList.remove("invisible");
@@ -55,6 +46,7 @@ function validarQueEsEmail(email) {
 function validateEmail() {
   var email = document.getElementById("input1").value;
   var resultado = document.getElementById("result");
+  resultado.classList.add("texto_rojo")
   var jsRequest = {
     "correo": email
   };
@@ -121,6 +113,7 @@ function repetirCorreo() {
   var correo = document.getElementById("input1").value;
   var correo_repetido = document.getElementById("input2").value;
   var resultado = document.getElementById("result2");
+  resultado.classList.add("texto_rojo");
   if (correo != correo_repetido) {
     resultado.innerHTML = "Correo ingresado no coincide";
   }
@@ -133,6 +126,7 @@ function repetirContraseña() {
   var contraseña = document.getElementById("input4").value;
   var confContraseña = document.getElementById("input5").value;
   var resultado = document.getElementById("result4");
+  resultado.classList.add("texto_rojo");
   if (contraseña == confContraseña) {
     resultado.innerHTML = ""; resultado.value = "";
   }

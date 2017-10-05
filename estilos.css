@@ -27,7 +27,7 @@ html,body, .pantalla{
 .registro{
     border: 1px solid black;
     background: white;
-    height: 670px;
+    height: 720px;
 }
 .input_text{
     width: 450px;
@@ -43,6 +43,7 @@ html,body, .pantalla{
     background: #28a745;
     color: white;
     border: 1px solid white;
+    height: 40px;
 }
 .h_azul:hover{
     color: blue;
@@ -50,4 +51,6 @@ html,body, .pantalla{
 .h_rojo:hover{
     color: red;
 }
-    
+.texto_rojo{
+    color: red;
+}    
