@@ -37,8 +37,6 @@ var habilitar_botones = function () {
     c.disabled = true;
     d.disabled = true;
     e.disabled = true;
-
-
   }
   else {
     a.disabled = false;
@@ -61,7 +59,8 @@ function validateEmail() {
     "correo": email
   };
   if (validarQueEsEmail(email)) {
-    resultado.innerHTML = "";
+    resultado.innerHTML = ""; resultado.value = "";
+    console.log("cagadox2");
     console.log(JSON.stringify(jsRequest));
     //Iniciamos la comunicacion con el servidor
     var url = "http://45.55.64.102/g2/usuario/correo_repetido";
@@ -96,7 +95,8 @@ function respuesta(evt) {
     console.log(evt.target.responseText);
     var respuesta = JSON.parse(evt.target.responseText);
     if (respuesta.mensaje[0] == 0) {
-      resultado.innerHTML = "";
+      resultado.innerHTML = ""; resultado.value = "";
+      console.log("cagado");
     } else if (respuesta.mensaje[0] == 1) {
       resultado.innerHTML = "correo ingresado existe";
     }
@@ -109,7 +109,8 @@ function respuesta1(evt) {
     console.log(evt.target.responseText);
     var respuesta = JSON.parse(evt.target.responseText);
     if (respuesta.mensaje[0] == 0) {
-      resultado.innerHTML = "";
+      resultado.innerHTML = ""; resultado.value = "";
+      console.log("xd");
     } else if (respuesta.mensaje[0] == 1) {
       resultado.innerHTML = "Usuario ya existente";
     }
@@ -124,7 +125,7 @@ function repetirCorreo() {
     resultado.innerHTML = "Correo ingresado no coincide";
   }
   else {
-    resultado.innerHTML = "";
+    resultado.innerHTML = ""; resultado.value = "";
   }
 };
 
@@ -133,7 +134,7 @@ function repetirContraseña() {
   var confContraseña = document.getElementById("input5").value;
   var resultado = document.getElementById("result4");
   if (contraseña == confContraseña) {
-    resultado.innerHTML = "";
+    resultado.innerHTML = ""; resultado.value = "";
   }
   else {
     resultado.innerHTML = "Contraseña ingresada no coincide";
@@ -178,30 +179,6 @@ function respuestaPassword(evt){
   }
 };
 
-
-/*var addTodoClick = function () {
-  var correo = document.getElementById("input1").value;
-  var user = document.getElementById("input3").value;
-  var contraseña = document.getElementById("input4").value;
-
-  var jsRequest = {
-    "usuario": user,
-    "contrasenia": contraseña,
-    "correo": correo
-  };
-
-  console.log(JSON.stringify(jsRequest));
-
-  // Iniciamos la comunicacion con el servidor
-  var url = "http://45.55.64.102/g2/usuario/guardar"
-  var req = new XMLHttpRequest();
-  req.open("POST", url);
-  req.onreadystatechange = respuestaAddTodo;
-  console.log("aca");
-  req.send(JSON.stringify(jsRequest));
-  console.log("aca");
-};
-*/
 
 var respuestaAddTodo = function (evt) {
   if (evt.target.readyState == 4) {
@@ -257,10 +234,29 @@ function redireccion(evt){
   }
 }
 
+function restringirRegistro()
+{
+  var a=document.getElementById("result").value;
+  var b=document.getElementById("result2").value;
+  var c=document.getElementById("result3").value;
+  var d=document.getElementById("result4").value;
+  var boton=document.getElementById("guar_camb");
+  if(a==""&&b==""&&c==""&&d=="")
+  {
+    boton.disabled=false;
+    console.log("enable");
+  }
+  else{
+    boton.disabled=true;
+    console.log("sisable");
+  }
+}
+
 var main = function () {
   document.getElementById("crear_usuario").addEventListener("click", abrir_registro);
     document.getElementById("icon_cerrar").addEventListener("click", cerrar_registro);
     document.getElementById("guar_camb").addEventListener("click", cerrar_registro);
+    document.addEventListener("keyup", restringirRegistro);
     document.getElementById("input1").addEventListener("keyup",validateEmail);
     document.addEventListener("click", habilitar_botones);
     document.getElementById("input2").addEventListener("keyup",repetirCorreo);
