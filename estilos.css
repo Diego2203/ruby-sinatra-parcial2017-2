@@ -25,9 +25,8 @@ html,body, .pantalla{
     overflow: auto;
 }
 .registro{
-    border: 1px solid black;
     background: white;
-    height: 720px;
+    height: 740px;
 }
 .input_text{
     width: 450px;
