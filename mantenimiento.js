@@ -16,10 +16,14 @@ var crear_tablas_nombre = function (lista_db, nodo_id, i) {
             if (nodo_id == "departamentos") {
                 if (document.getElementById("provincias").childNodes.length == 0) {
                     mostrar_prov(i + 1);
+                    eliminar_nodos("distritos");
+                    eliminar_nodos("distr_head");
                 }
                 else {
-                    eliminar_nodos("provincias")
-                    eliminar_nodos("prov_head")
+                    eliminar_nodos("provincias");
+                    eliminar_nodos("prov_head");
+                    eliminar_nodos("distritos");
+                    eliminar_nodos("distr_head");
                 }
             }
             if (nodo_id == "provincias") {
@@ -27,8 +31,8 @@ var crear_tablas_nombre = function (lista_db, nodo_id, i) {
                     mostrar_distr(i + 1);
                 }
                 else {
-                    eliminar_nodos("distritos")
-                    eliminar_nodos("distr_head")
+                    eliminar_nodos("distritos");
+                    eliminar_nodos("distr_head");
                 }
             }
 
@@ -176,8 +180,6 @@ var agregar_tr = function (t_body) {
             xhr.onreadystatechange = function () {
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     console.log(t_body + "guardado");
-                    document.getElementById("dep_ing").textContent = t_body + " guardado";
-
                 }
             }
             xhr.open("POST", "http://45.55.64.102/g2/departamento/crear", true);
@@ -192,7 +194,6 @@ var agregar_tr = function (t_body) {
             xhr2.onreadystatechange = function () {
                 if (xhr2.readyState == 4 && xhr2.status == 200) {
                     console.log(t_body + "guardado");
-                    document.getElementById("prov_ing").textContent = t_body + " guardado";
                 }
             }
             xhr2.open("POST", "http://45.55.64.102/g2/provincia/crear", true);
@@ -207,7 +208,6 @@ var agregar_tr = function (t_body) {
             xhr3.onreadystatechange = function () {
                 if (xhr3.readyState == 4 && xhr3.status == 200) {
                     console.log(t_body + "guardado");
-                    document.getElementById("dist_ing").textContent = t_body + " guardado";
                 }
             }
             xhr3.open("POST", "http://45.55.64.102/g2/distrito/crear", true);
