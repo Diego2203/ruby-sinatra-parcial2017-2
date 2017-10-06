@@ -244,7 +244,8 @@ var eleminar_dep = function (id) {
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4 && xhr.status == 200) {
-            console.log("departamento eliminado")
+            console.log("departamento eliminado");
+            document.getElementById("prov_ing").textContent = "DEPARTAMENTO ELIMINADO";
         }
     };
 
@@ -258,7 +259,7 @@ var eleminar_prov = function (id) {
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4 && xhr.status == 200) {
-            console.log("provincia eliminada")
+            document.getElementById("prov_ing").textContent = "PROVINCIA ELIMINADO";
         }
     };
 
@@ -273,6 +274,7 @@ var eleminar_dis = function (id) {
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4 && xhr.status == 200) {
             console.log("distrito eliminado")
+            document.getElementById("prov_ing").textContent = "DISTRITO ELIMINADO";
         }
     };
 
