@@ -23,6 +23,15 @@ var crear_tablas_nombre = function (lista_db, nodo_id, i) {
                 eliminar_nodos("prov_head")
             }
         }
+        if(nodo_id == "provincias"){
+            if(document.getElementById("distritos").childNodes.length == 0){
+                mostrar_distr(i + 1);
+            }
+            else{
+                eliminar_nodos("distritos")
+                eliminar_nodos("distr_head")
+            }
+        }
         
     })
     i_pencil.className = "fa fa-pencil ml-3 h_azul animated pulse";
@@ -73,6 +82,27 @@ var mostrar_prov = function (depart_id) {
         }
     }
     xhr.open("GET", "http://45.55.64.102/g2/provincia/listar/" + depart_id, true);
+    xhr.send();
+}
+var mostrar_distr = function (prov_id) {
+    var xhr = new XMLHttpRequest();
+    var lista_prov = 0;
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            lista_prov = JSON.parse(xhr.responseText);
+            //console.log(lista_prov);
+            var nombre_head = document.createElement("th");
+            nombre_head.textContent = "Nombre";
+            var ope_head = document.createElement("th");
+            ope_head.textContent = "Operaciones";
+            document.getElementById("distr_head").appendChild(nombre_head);
+            document.getElementById("distr_head").appendChild(ope_head);
+            for (var i = 0; i < lista_prov.length; i++) {
+                crear_tablas_nombre(lista_prov[i], "distritos",i);
+            }
+        }
+    }
+    xhr.open("GET", "http://45.55.64.102/g2/distrito/listar/" + prov_id, true);
     xhr.send();
 }
 var eliminar_nodos = function(nodo_id){
