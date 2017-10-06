@@ -33,7 +33,6 @@ var cerrar_registro = function() {
             modal.classList.remove("animated");
             modal.classList.remove("bounceOut");
         }
-
     })
 }
 //si el boton de condiciones para el registro no se activa, los campos para rellenar tampoco

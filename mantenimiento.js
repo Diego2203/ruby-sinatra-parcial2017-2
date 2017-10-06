@@ -69,7 +69,7 @@ var crear_tablas_nombre = function (lista_db, nodo_id, i) {
             inp_txt.type = "text";
             dep_td.appendChild(inp_txt)
         }
-        
+
     })
     i_pencil.className = "fa fa-pencil ml-3 h_azul animated pulse";
     i_eliminar.className = "fa fa-times ml-3 h_rojo animated pulse";
@@ -313,7 +313,7 @@ var editar_dis = function(id,valor){
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4 && xhr.status == 200) {
-            document.getElementById("dist_ing").textContent = "distrito editado"     
+            document.getElementById("dist_ing").textContent = "distrito editado"
         }
     };
 
@@ -328,4 +328,4 @@ var main = function () {
     escuchar_botones();
 }
 
-window.onload = main;   
+window.onload = main;
